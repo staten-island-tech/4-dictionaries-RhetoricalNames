@@ -12,15 +12,33 @@ a “cart”. Users will be shown the list of items and asked to purchase one.
 Afterwards ask the user if they wish to continue. Once the user has decided
 they are done shopping, print the names of the items purchased and the
 total of the cart. """
-toilet_paper = {
-    "name": "Ultra-Soft toilet paper",
-    "price": 15.29,
-    "department": "Hygiene",
+freezer = {
+    "name": "Refrigerator",
+    "price": 1599.99,
+    "description": "High capacity refrigerator",
 }
 tv = {
-    "name": "tv",
-    "price": 515.29,
-    "department": "entertainment",
+    "name": "TV",
+    "price": 1859.99,
+    "description": "Flat Screen TV",
 }
-store_items = [toilet_paper[name], tv]
-print(store_items)
+laptop = {
+    "name": "Laptop",
+    "price": 1299.99,
+    "description": "Lightweight, fast laptop"
+}
+confirm = "Not decided."
+while confirm is not "yes" or "y" or "no" or "n":
+    store_items = [freezer, tv, laptop]
+    for index, item in enumerate(store_items):
+        print(index, ":", item)
+
+    purchase = input("What item do you want to buy? Input a number.")
+    purchase = int(purchase)
+    confirm = input(f"You selected a {store_items[purchase]["name"]}. Are you sure?")
+    if confirm == "yes" or "y":
+        print("Thank you for your purchase!")
+    elif confirm == "no" or "n":
+        print("Order canceled.")
+    else:
+        print("Not a valid input.")
