@@ -12,33 +12,38 @@ a “cart”. Users will be shown the list of items and asked to purchase one.
 Afterwards ask the user if they wish to continue. Once the user has decided
 they are done shopping, print the names of the items purchased and the
 total of the cart. """
-freezer = {
+store_items = [{
     "name": "Refrigerator",
     "price": 1599.99,
-    "description": "High capacity refrigerator",
-}
-tv = {
+    "description": "High capacity refrigerator",}
+,{
     "name": "TV",
     "price": 1859.99,
-    "description": "Flat Screen TV",
-}
-laptop = {
+    "description": "Flat Screen TV",}
+,{
     "name": "Laptop",
     "price": 1299.99,
-    "description": "Lightweight, fast laptop"
-}
+    "description": "Lightweight, fast laptop"}]
+checkout = "Incomplete"
 confirm = "Not decided."
-while confirm is not "yes" or "y" or "no" or "n":
-    store_items = [freezer, tv, laptop]
-    for index, item in enumerate(store_items):
+cart = ["cart printed"]
+while checkout is not "Complete":
+    for index, item in enumerate(store_items, start = 1):
         print(index, ":", item)
-
-    purchase = input("What item do you want to buy? Input a number.")
-    purchase = int(purchase)
-    confirm = input(f"You selected a {store_items[purchase]["name"]}. Are you sure?")
-    if confirm == "yes" or "y":
-        print("Thank you for your purchase!")
-    elif confirm == "no" or "n":
-        print("Order canceled.")
-    else:
-        print("Not a valid input.")
+    print(f"{len(store_items) + 1} : View Cart")
+    choice = input("What do you want to do? Input a number.")
+    choice = int(choice)
+    choice = choice - 1
+    if choice == len(store_items) + 1:
+        print(cart)
+    elif not len(store_items) + 1: #'4' isn't valid input
+        choice = int(choice)
+        choice = choice - 1
+        confirm = input(f"You selected a {store_items[choice]["name"]}. Are you sure?")
+        if confirm == "yes" or confirm == "y":
+            print("Item added to cart.")
+            cart.append(choice)
+        elif confirm == "no" or confirm == "n":
+            print("Item not added to cart.")
+        else:
+            print("Invalid input. Please try again.")
