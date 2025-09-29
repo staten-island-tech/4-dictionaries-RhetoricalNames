@@ -24,26 +24,36 @@ store_items = [{
     "name": "Laptop",
     "price": 1299.99,
     "description": "Lightweight, fast laptop"}]
-checkout = "Incomplete"
+checkout = "Not confirmed"
 confirm = "Not decided."
-cart = ["cart printed"]
-while checkout is not "Complete":
+total = 0
+cart = []
+while checkout is not "y" or checkout is not "yes":
     for index, item in enumerate(store_items, start = 1):
         print(index, ":", item)
     print(f"{len(store_items) + 1} : View Cart")
+    print(f"{len(store_items) + 2} : Check out items")
     choice = input("What do you want to do? Input a number.")
     choice = int(choice)
-    choice = choice - 1
     if choice == len(store_items) + 1:
         print(cart)
-    elif not len(store_items) + 1: #'4' isn't valid input
+    elif choice == len(store_items) + 2 and (len(cart) > 0):
+        print(f"Items: {cart}. Total: {total}")
+        checkout = input("Are you ready to check out your items?")
+        print(checkout)
+        if checkout == "no" or checkout == "n":
+            print("Purchases canceled.")
+            quit()
+    else:
         choice = int(choice)
         choice = choice - 1
         confirm = input(f"You selected a {store_items[choice]["name"]}. Are you sure?")
         if confirm == "yes" or confirm == "y":
             print("Item added to cart.")
-            cart.append(choice)
+            cart.append(store_items[choice]["name"])
+            total = (total + store_items[choice]["price"])
         elif confirm == "no" or confirm == "n":
             print("Item not added to cart.")
         else:
             print("Invalid input. Please try again.")
+print("Thank you for shopping here!")
