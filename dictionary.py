@@ -23,12 +23,17 @@ store_items = [{
 ,{
     "name": "Laptop",
     "price": 1299.99,
-    "description": "Lightweight, fast laptop"}]
+    "description": "Lightweight, fast laptop"}
+,{
+    "name": "Keyboard and Mouse",
+    "price": 159.29,
+    "description": "Two-in one USB keyboard and mouse"
+}]
 checkout = "Not confirmed"
 confirm = "Not decided."
 total = 0
 cart = []
-while checkout is not "y" or checkout is not "yes":
+while not checkout == "y" or not checkout == "yes":
     for index, item in enumerate(store_items, start = 1):
         print(index, ":", item)
     print(f"{len(store_items) + 1} : View Cart")
@@ -40,10 +45,15 @@ while checkout is not "y" or checkout is not "yes":
     elif choice == len(store_items) + 2 and (len(cart) > 0):
         print(f"Items: {cart}. Total: {total}")
         checkout = input("Are you ready to check out your items?")
-        print(checkout)
-        if checkout == "no" or checkout == "n":
-            print("Purchases canceled.")
+        if checkout == "yes" or checkout == "y": 
+            print("Thank you for shopping here!")
             quit()
+        elif checkout == "no" or checkout == "n":
+            print("Purchases canceled. All items have been removed from your cart.")
+            cart = []
+            total = 0
+    elif cart == [] and choice == len(store_items) + 2:
+        print("No items are in your cart.")
     else:
         choice = int(choice)
         choice = choice - 1
@@ -56,4 +66,3 @@ while checkout is not "y" or checkout is not "yes":
             print("Item not added to cart.")
         else:
             print("Invalid input. Please try again.")
-print("Thank you for shopping here!")
